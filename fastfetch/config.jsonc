@@ -1,0 +1,31 @@
+{
+    "$schema": "https://github.com/fastfetch-cli/fastfetch/raw/master/doc/json_schema.json",
+    "logo": {
+        "type": "small", // Logo type: auto, builtin, small, file, etc.
+        "source": "arch" // Built-in logo name or file path
+    },
+    "modules": [
+        "title",
+        "separator",
+        {
+            "type": "os",
+            "key": "OS",
+            "keyColor": "blue",
+            "format": "{name} {version}"
+        },
+        "wm",
+        {
+            "type": "kernel",
+            "key": "Kernel"
+        },
+        {
+            "type": "memory",
+            "key": "Memory",
+            "percent": {
+                "type": 3,
+                "green": 30,
+                "yellow": 70
+            }
+        }
+    ]
+}

@@ -1,0 +1,78 @@
+{
+  "spacing": 0,
+  "reload_style_on_change": true,
+  "margin": 0,
+  "height": 24,
+  "modules-left": [
+    "hyprland/workspaces",
+    "tray"
+  ],
+  "modules-center": [
+    "clock"
+  ],
+  "modules-right": [
+    "bluetooth",
+    "cpu",
+    "memory",
+    "pulseaudio",
+    "network"
+  ],
+  "tray": {
+    "icon-size": 12,
+    "spacing": 12
+  },
+  "clock": {
+    "format": "{:%a, %H:%M}",
+    "format-alt": "{:%A, %D}",
+    "tooltip-format": "<tt>{calendar}</tt>",
+    "calendar": {
+      "mode": "month",
+      "mode-mon-col": 3,
+      "format": {
+        "months": "<span color='#fab387'><b>{}</b></span>",
+        "days": "<span color='#cdd6f4'><b>{}</b></span>",
+        "weekdays": "<span color='#a6adc8'><b>{}</b></span>",
+        "today": "<span color='#f38ba8'><b><u>{}</u></b></span>"
+      }
+    },
+    "actions": {
+      "on-click": "shift_reset",
+      "on-scroll-up": "shift_up",
+      "on-scroll-down": "shift_down"
+    }
+  },
+  "bluetooth": {
+    "format": " {status}",
+    "format-disabled": " off",
+    "format-connected": " {status}",
+    "tooltip-format": "{controller_alias}\t{controller_address}",
+    "tooltip-format-connected": "{controller_alias}\t{controller_address}\n\n{device_enumerate}",
+    "tooltip-format-enumerate-connected": "{device_alias}\t{device_address}\t{device_battery_percentage}%",
+    "on-click": "blueman-manager"
+  },
+  "pulseaudio": {
+    "format": "  {volume}%",
+    "format-muted": "󰖁",
+    "scroll-step": 2,
+    "on-click": "pavucontrol"
+  },
+  "cpu": {
+    "interval": 30,
+    "format": " {usage}%",
+    "max-length": 10
+  },
+  "memory": {
+    "interval": 30,
+    "format": " {}%",
+    "max-length": 10
+  },
+  "network": {
+    "interval": 60,
+    "format-wifi": "",
+    "format-ethernet": "󰈀",
+    "format-disconnected": "󰈂",
+    "tooltip-format-ethernet": "󰈀 {ifname}",
+    "tooltip-format-wifi": "{essid}",
+    "on-click": "nm-connection-editor"
+  }
+}
