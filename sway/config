@@ -1,0 +1,255 @@
+# Default config for sway
+#
+# Copy this to ~/.config/sway/config and edit it to your liking.
+#
+# Read `man 5 sway` for a complete reference.
+
+### Variables
+#
+# Logo key. Use Mod1 for Alt.
+set $mod Mod1
+# Home row direction keys, like vim
+set $left h
+set $down j
+set $up k
+set $right l
+# Your preferred terminal emulator
+set $term kitty
+set $browser firefox
+set $menu rofi -show drun
+
+font pango:JetBrainsMono Nerd Font Mono 8
+
+exec dunst
+exec_always pkill gammastep-indicator || gammastep-indicator &
+
+### Input configuration
+#
+# Example configuration:
+#
+  input "type:keyboard" {
+      xkb_layout "us"
+      xkb_variant "intl"
+  }
+#
+# You can get the names of your inputs by running: swaymsg -t get_inputs
+# Read `man 5 sway-input` for more information about this section.
+
+### Output configuration
+#
+# Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
+# tearing
+#
+# Example configuration:
+#
+output HDMI-A-1 resolution 1920x1080 position 1920,0
+output * bg ~/dotfiles/wallpaper/arch.png fill
+output * allow_tearing yes
+output * max_render_time off
+#
+# You can get the names of your outputs by running: swaymsg -t get_outputs
+
+### Idle configuration
+#
+# Example configuration:
+#
+exec swayidle -w \
+         timeout 3000 'swaylock -f -c 000000' \
+         timeout 6000 'swaymsg "output * power off"' resume 'swaymsg "output * power on"' \
+         before-sleep 'swaylock -f -c 000000'
+#
+# This will lock your screen after 300 seconds of inactivity, then turn off
+# your displays after another 300 seconds, and turn your screens back on when
+# resumed. It will also lock your screen before your computer goes to sleep.
+
+### Input configuration
+#
+# Example configuration:
+#
+#
+# You can get the names of your inputs by running: swaymsg -t get_inputs
+# Read `man 5 sway-input` for more information about this section.
+
+### Key bindings
+#
+# Basics:
+#
+    bindsym $mod+Return exec $term
+
+    bindsym $mod+w kill
+    bindsym $mod+Shift+z exec slurp | grim -g - - | wl-copy
+
+    # Start your launcher
+    bindsym $mod+space exec $menu
+    bindsym $mod+C exec rofi -show calc -modi calc -no-sort -no-persist-history -no-history -no-bold
+    bindsym $mod+period exec wl-color-picker clipboard; mode "default"
+
+    bindsym $mod+e exec nautilus
+
+    # Drag floating windows by holding down $mod and left mouse button.
+    # Resize them with right mouse button + $mod.
+    # Despite the name, also works for non-floating windows.
+    # Change normal to inverse to use left mouse button for resizing and right
+    # mouse button for dragging.
+    floating_modifier $mod normal
+
+    # Reload the configuration file
+    bindsym $mod+Shift+r reload
+
+    # Exit sway (logs you out of your Wayland session)
+    bindsym $mod+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -B 'Yes, exit sway' 'swaymsg exit'
+
+input * {
+    repeat_delay 200
+    repeat_rate 50
+}
+
+
+#
+# Moving around:
+#
+    # Move your focus around
+    bindsym $mod+$left focus left
+    bindsym $mod+$down focus down
+    bindsym $mod+$up focus up
+    bindsym $mod+$right focus right
+    # Or use $mod+[up|down|left|right]
+    # bindsym $mod+Left focus left
+    # bindsym $mod+Down focus down
+    # bindsym $mod+Up focus up
+    # bindsym $mod+Right focus right
+
+    # Move the focused window with the same, but add Shift
+    bindsym $mod+Shift+$left move left
+    bindsym $mod+Shift+$down move down
+    bindsym $mod+Shift+$up move up
+    bindsym $mod+Shift+$right move right
+    # Ditto, with arrow keys
+    bindsym $mod+Shift+Left move left
+    bindsym $mod+Shift+Down move down
+    bindsym $mod+Shift+Up move up
+    bindsym $mod+Shift+Right move right
+#
+# Workspaces:
+#
+    # Switch to workspace
+    bindsym $mod+y workspace number 1
+    bindsym $mod+u workspace number 2
+    bindsym $mod+i workspace number 3
+    bindsym $mod+o workspace number 4
+    bindsym $mod+p workspace number 5
+    bindsym $mod+6 workspace number 6
+    bindsym $mod+7 workspace number 7
+    bindsym $mod+8 workspace number 8
+    bindsym $mod+9 workspace number 9
+    bindsym $mod+0 workspace number 10
+    # Move focused container to workspace
+    bindsym $mod+Shift+y move container to workspace number 1
+    bindsym $mod+Shift+u move container to workspace number 2
+    bindsym $mod+Shift+i move container to workspace number 3
+    bindsym $mod+Shift+o move container to workspace number 4
+    bindsym $mod+Shift+p move container to workspace number 5
+    bindsym $mod+Shift+6 move container to workspace number 6
+    bindsym $mod+Shift+7 move container to workspace number 7
+    bindsym $mod+Shift+8 move container to workspace number 8
+    bindsym $mod+Shift+9 move container to workspace number 9
+    bindsym $mod+Shift+0 move container to workspace number 10
+    # Note: workspaces can have any name you want, not just numbers.
+    # We just use 1-10 as the default.
+#
+# Layout stuff:
+#
+    # You can "split" the current object of your focus with
+    # $mod+b or $mod+v, for horizontal and vertical splits
+    # respectively.
+    bindsym $mod+b splith
+    bindsym $mod+v splitv
+    #bindsym $mod+t layout tabbed
+    #bindsym $mod+s layout stacking
+    #bindsym $mod+e layout toggle split
+    bindsym $mod+semicolon layout toggle split
+    bindsym $mod+f exec fullscreen toggle
+    bindsym $mod+Shift+f floating toggle
+
+#
+# Scratchpad:
+#
+
+#
+# Resizing containers:
+#
+mode "resize" {
+    bindsym $left resize shrink width 80px
+    bindsym $down resize grow height 80px
+    bindsym $up resize shrink height 80px
+    bindsym $right resize grow width 80px
+
+    bindsym $mod+r mode "default"
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+
+bindsym $mod+r mode "resize"
+
+mode "special" {
+
+  bindsym s exec slurp | grim -g - - | wl-copy; mode "default"
+  bindsym a exec grim -g "$(slurp -o -f '%x,%y %wx%h')" "$HOME/screenshot-$(date +%Y%m%d-%H%M%S).png"; mode "default"
+  bindsym Shift+s grim -g "$(slurp)" "$HOME/screenshot-$(date +%Y%m%d-%H%M%S).png"; mode "default"
+  bindsym v exec cliphist list | rofi -dmenu | cliphist decode | wl-copy
+  bindsym Return mode "default"
+  bindsym Escape mode "default"
+}
+
+bindsym $mod+a mode "special"
+
+#
+# Utilities:
+#
+    # Special keys to adjust volume via PulseAudio
+    bindsym --locked XF86AudioMute exec pactl set-sink-mute \@DEFAULT_SINK@ toggle && swayosd-client --output-mute-toggle
+    bindsym --locked XF86AudioRaiseVolume exec pactl set-sink-volume \@DEFAULT_SINK@ +5% && swayosd-client --output-volume=raise
+    bindsym --locked XF86AudioLowerVolume exec pactl set-sink-volume \@DEFAULT_SINK@ -5% && swayosd-client --output-volume=lower
+    bindsym --locked XF86AudioMicMute exec pactl set-source-mute \@DEFAULT_SOURCE@ toggle &&
+    # Special keys to adjust brightness via brightnessctl
+    bindsym --locked XF86MonBrightnessDown exec brightnessctl set 5%-
+    bindsym --locked XF86MonBrightnessUp exec brightnessctl set 5%+
+#
+# Status Bar:
+#
+# Read `man 5 sway-bar` for more information about this section.
+
+client.focused #9b8d7f #9b8d7f #000000 #9b8d7f #9b8d7f
+client.focused_inactive #202020 #202020 #9b8d7f #202020 #202020
+client.unfocused #202020 #202020 #9b8d7f #202020 #202020
+
+bar {
+    # swaybar_command swaybar
+    swaybar_command waybar
+
+    # When the status_command prints a new line to stdout, swaybar updates.
+    # The default just shows the current date and time.
+    status_command while date +'%Y-%m-%d :: %X'; do sleep 1; done
+
+  position bottom
+  separator_symbol "::"
+  colors {
+    background #222222
+    statusline #9b8d7f
+    separator #9b8d7f
+
+    focused_workspace #9b8d7f #9b8d7f #222222
+    inactive_workspace #222222 #222222 #9b8d7f
+    active_workspace #222222 #222222 #9b8d7f
+    urgent_workspace #222222 #222222 #9b8d7f
+    binding_mode #222222 #222222 #9b8d7f
+  }
+  font pango:JetBrainsMono Nerd Font Mono 8
+  tray_output HDMI-A-0
+}
+
+
+default_border pixel 2
+default_floating_border pixel 2
+
+include /etc/sway/config.d/*
