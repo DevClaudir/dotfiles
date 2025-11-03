@@ -1,8 +1,7 @@
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:$HOME/.local/bin:/usr/local/bin:$PATH
 
-export QT_QPA_PLATFORMTHEME=qt6ct
-fastfetch
+export ZSH_CUSTOM="$HOME/dotfiles/zsh"
 
 # Path to your Oh My Zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
@@ -13,13 +12,6 @@ export ZSH="$HOME/.oh-my-zsh"
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
 ZSH_THEME="catppuccin"
 CATPPUCCIN_FLAVOR="mocha"
-CATPPUCCIN_SHOW_TIME=false
-
-autoload -U compinit
-compinit
-
-bindkey ';' autosuggest-accept
-source ~/.oh-my-zsh/plugins/zsh-syntax-highlighting/themes/catppuccin_mocha-zsh-syntax-highlighting.zsh
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -81,8 +73,9 @@ source ~/.oh-my-zsh/plugins/zsh-syntax-highlighting/themes/catppuccin_mocha-zsh-
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git zsh-autosuggestions)
+plugins=(git zsh-autosuggestions zsh-history-substring-search) 
 
+bindkey ';' autosuggest-accept
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
@@ -108,10 +101,6 @@ source $ZSH/oh-my-zsh.sh
 # the $ZSH_CUSTOM folder, with .zsh extension. Examples:
 # - $ZSH_CUSTOM/aliases.zsh
 # - $ZSH_CUSTOM/macos.zsh
-# For a full list of active aliases, run `alias`.
-#
-# Example aliases
-# alias zshconfig="mate ~/.zshrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
+alias ..='cd ..'
 alias ll='ls -lh'
 alias la='ls -la'
