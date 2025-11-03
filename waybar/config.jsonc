@@ -5,31 +5,46 @@
   "spacing": 0,
   "height": 0,
   "custom/separator": {
-    "format": ":",
+    "format": "::",
     "interval": "once",
     "tooltip": false
   },
-  "modules-left": ["hyprland/workspaces", "hyprland/window"],
+  "modules-left": [
+    "sway/workspaces",
+    "sway/window"
+  ],
   "modules-right": [
     "tray",
+    "cpu",
+    "custom/separator",
+    "memory",
+    "custom/separator",
     "bluetooth",
     "custom/separator",
     "pulseaudio",
     "custom/separator",
     "clock"
   ],
-  "hyprland/window": {
-    "format": "{class}" 
+  "sway/window": {
+    "max-length": 30
   },
   "tray": {
-    "icon-size": 21,
+    "icon-size": 14,
     "spacing": 10
   },
-  "clock": {
-    "format": "{:%a %d %b %H:%M}",
-    "format-alt": "{:L%d %B W%V %Y}",
-    "tooltip": false,
-    "on-click-right": "omarchy-cmd-tzupdate"
+  "cpu": {
+    "format": "cpu {usage}%",
+    "interval": 15,
+    "states": {
+      "critical": 90
+    }
+  },
+  "memory": {
+    "format": "mem {percentage}%",
+    "interval": 15,
+    "states": {
+      "critical": 90
+    }
   },
   "bluetooth": {
     "format": "bt {status}",
@@ -38,14 +53,12 @@
   },
   "pulseaudio": {
     "format": "vol {volume}%",
-    "on-click": "alacritty --class=Wiremix -e wiremix",
-    "on-click-right": "pamixer -t",
-    "tooltip-format": "Playing at {volume}%",
-    "scroll-step": 5,
-    "tooltip": false
+    "max-volume": 100,
+    "on-click": "pavucontrol"
   },
-  "tray": {
-    "icon-size": 12,
-    "spacing": 12
+  "clock": {
+    "format": "{:%a %d %b  %H:%M}",
+    "tooltip": false,
+    "on-click-right": ""
   }
 }
