@@ -104,3 +104,10 @@ source $ZSH/oh-my-zsh.sh
 alias ..='cd ..'
 alias ll='ls -lh'
 alias la='ls -la'
+
+# Iniciar ssh-agent se não estiver rodando
+if ! pgrep -u "$USER" ssh-agent > /dev/null; then
+    eval "$(ssh-agent -s)"
+    ssh-add ~/.ssh/id_ed25519 2>/dev/null
+fi
+
