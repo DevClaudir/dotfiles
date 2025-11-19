@@ -102,8 +102,13 @@ source $ZSH/oh-my-zsh.sh
 # - $ZSH_CUSTOM/aliases.zsh
 # - $ZSH_CUSTOM/macos.zsh
 alias ..='cd ..'
+alias ls='exa --icons --group-directories-first'
 alias ll='ls -lh'
 alias la='ls -la'
+alias g='git'
+alias gc='git commit'
+alias gp='git push'
+alias gpl='git pull'
 
 # Iniciar ssh-agent se não estiver rodando
 if ! pgrep -u "$USER" ssh-agent > /dev/null; then
