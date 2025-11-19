@@ -10,8 +10,8 @@
     "tooltip": false
   },
   "modules-left": [
-    "sway/workspaces",
-    "sway/window"
+    "hyprland/workspaces",
+    "hyprland/window"
   ],
   "modules-right": [
     "tray",
@@ -25,7 +25,7 @@
     "custom/separator",
     "clock"
   ],
-  "sway/window": {
+  "hyprland/window": {
     "max-length": 30
   },
   "tray": {
